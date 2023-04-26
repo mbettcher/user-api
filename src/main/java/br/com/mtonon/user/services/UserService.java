@@ -4,10 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-
 import br.com.mtonon.user.domain.User;
 import br.com.mtonon.user.domain.dto.UserDTO;
 import br.com.mtonon.user.repositories.UserRepository;
@@ -22,6 +21,11 @@ public class UserService {
 	public List<UserDTO> getAll() {
 		List<User> usuarios = userRepository.findAll();
 		return usuarios.stream().map(UserDTO::convert).collect(Collectors.toList());
+	}
+	
+	public Page<UserDTO> getAllPageble(Pageable page){
+		Page<User> usuarios = userRepository.findAll(page);
+		return usuarios.map(UserDTO::convert);
 	}
 
 	public UserDTO findById(Long userId) {
