@@ -4,26 +4,27 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import br.com.mtonon.user.domain.User;
 import br.com.mtonon.user.domain.dto.UserDTO;
 import br.com.mtonon.user.repositories.UserRepository;
-import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
-	private final UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 	public List<UserDTO> getAll() {
 		List<User> usuarios = userRepository.findAll();
 		return usuarios.stream().map(UserDTO::convert).collect(Collectors.toList());
 	}
 	
-	public Page<UserDTO> getAllPageble(Pageable page){
+	public Page<UserDTO> findAllPage(Pageable page){
 		Page<User> usuarios = userRepository.findAll(page);
 		return usuarios.map(UserDTO::convert);
 	}

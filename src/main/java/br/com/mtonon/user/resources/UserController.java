@@ -71,7 +71,7 @@ public class UserController {
 	
 	@GetMapping(value = "/pageable")
 	public Page<UserDTO> getUsersPage(Pageable pageable) {
-		return userService.getAllPageble(pageable);
+		return userService.findAllPage(pageable);
 	}
 
 }
