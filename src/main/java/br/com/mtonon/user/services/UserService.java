@@ -14,6 +14,7 @@ import br.com.mtonon.user.domain.dto.UserDTO;
 import br.com.mtonon.user.repositories.UserRepository;
 
 @Service
+//@RequiredArgsConstructor
 public class UserService {
 
 	@Autowired

@@ -2,6 +2,7 @@ package br.com.mtonon.user.resources;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -19,13 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.mtonon.user.domain.dto.UserDTO;
 import br.com.mtonon.user.services.UserService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping(value = "/user")
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class UserController {
 	
+	@Autowired
 	private UserService userService;
 	
 	@GetMapping(value = "/msg")
@@ -33,6 +34,7 @@ public class UserController {
 		return "Rota endpoint user funcionando!";
 	}
 	
+	@GetMapping(value = "/listar")
 	public List<UserDTO> getUsers(){
 		return userService.getAll();
 	}
